@@ -12,25 +12,41 @@ app.use(express.static('./public')) // for serving static files from the public 
 
 // create a note and save data in mognodb database
 app.post('/api/notes', async (req, res) => {
-    const { title, description } = req.body
-    const note = await noteModal.create({ 
-        title, description 
-    })
-    res.status(201).json({
-        messsage:"note created sucessfully",
-        sucess: true,
-        note
-    })
+    try {
+        const { title, description } = req.body
+        const note = await noteModal.create({ 
+            title, description 
+        })
+        res.status(201).json({
+            messsage:"note created sucessfully",
+            sucess: true,
+            note
+        })
+    } catch (err) {
+        console.log("Error creating note:", err);
+        res.status(500).json({
+            message: "Error creating note",
+            error: err.message
+        })
+    }
 })
 
 // fetched all th notes get notes
 app.get('/api/notes', async (req,res) => {
-    const notes = await noteModal.find()
-    res.status(200).json({
-        message: "notes fetched sucessfully",
-        sucess: true,
-        notes   
-    })
+    try {
+        const notes = await noteModal.find()
+        res.status(200).json({
+            message: "notes fetched sucessfully",
+            sucess: true,
+            notes   
+        })
+    } catch (err) {
+        console.log("Error fetching notes:", err);
+        res.status(500).json({
+            message: "Error fetching notes",
+            error: err.message
+        })
+    }
 }) 
 
 // delete api
@@ -64,7 +80,8 @@ app.patch('/api/notes/:id', async (req,res) => {
 
 
 // for any other route we will send the index.html file to the client
-app.use('*name', (req,res) => {
+// This only serves HTML for non-API routes
+app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
