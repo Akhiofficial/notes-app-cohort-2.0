@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -68,11 +67,6 @@ const haandleUpdateNte = (id) => {
       <input name="description" type="text" placeholder="Enter the description" />
       <button>Create note</button>
     </form>
-
-
-
-
-
 
       <div className="notes">
         {notes.map((note) => {
