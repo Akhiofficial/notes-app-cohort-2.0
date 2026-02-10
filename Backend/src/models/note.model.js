@@ -6,6 +6,6 @@ const noteSchema = new mongoose.Schema({
 })
 
 
-const noteModal = mongoose.model("note-day93", noteSchema)
+const noteModal = mongoose.model("notes", noteSchema)
 
 module.exports = noteModal

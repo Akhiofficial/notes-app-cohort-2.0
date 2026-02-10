@@ -23,7 +23,7 @@ app.post('/api/notes', async (req, res) => {
     })
 })
 
-// fetched all th notes
+// fetched all th notes get notes
 app.get('/api/notes', async (req,res) => {
     const notes = await noteModal.find()
     res.status(200).json({
@@ -33,24 +33,22 @@ app.get('/api/notes', async (req,res) => {
     })
 }) 
 
-// dete api
+// delete api
 // delete notes with req.params 
 app.delete('/api/delete/:id', async (req,res) => {
     const id = req.params.id
-    const note = await noteModal.findByIdAndDelete(id)
+    const notes = await noteModal.findByIdAndDelete(id)
     res.status(200).json({
         message: "notes deleted",
-        note
+        notes
     })
-
 })
 
 
-/** 
- * update the notes with req.params and req.body
- * req.params se id milega aur req.body se title aur description milega
+/* 
+  update the notes with req.params and req.body
+  req.params se id milega aur req.body se title aur description milega
  */
-
 app.patch('/api/notes/:id', async (req,res) => {
     const id = req.params.id
     const { title, description } = req.body
@@ -65,11 +63,10 @@ app.patch('/api/notes/:id', async (req,res) => {
 })
 
 
+// for any other route we will send the index.html file to the client
 app.use('*name', (req,res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 })
-
-
 
 
 module.exports = app;
