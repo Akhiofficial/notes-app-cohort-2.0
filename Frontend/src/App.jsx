@@ -11,7 +11,7 @@ const App = () => {
   const [editDescription, setEditDescription] = useState("");
   
   const fetchednotes = ()=> {
-    axios.get("http://localhost:3000/api/notes").then((res) => {
+    axios.get("https://notes-app-ohc6.onrender.com/api/notes").then((res) => {
       setNotes(res.data.notes);
     });
 } 
@@ -27,7 +27,7 @@ const handeSubmit = (e)=>{
   const {title, description} = e.target.elements;
   console.log(title.value,description.value);
 
-  axios.post("http://localhost:3000/api/notes", {
+  axios.post("https://notes-app-ohc6.onrender.com/api/notes", {
     title: title.value,
     description: description.value
   }).then((res)=>{
@@ -38,7 +38,7 @@ const handeSubmit = (e)=>{
 
 // delete the notes 
 const haandleDeleeteNte = (id) => {
-  axios.delete(`http://localhost:3000/api/delete/${id}`)
+  axios.delete(`https://notes-app-ohc6.onrender.com/api/delete/${id}`)
   .then(res=>  {
     console.log(res.data);
     fetchednotes();
@@ -47,7 +47,7 @@ const haandleDeleeteNte = (id) => {
 
 // update the notes 
 const haandleUpdateNte = (id) => {
-  axios.patch(`http://localhost:3000/api/notes/${id}`, {
+  axios.patch(`https://notes-app-ohc6.onrender.com/api/notes/${id}`, {
     title: editTitle,
     description: editDescription
   }).then(res => {
