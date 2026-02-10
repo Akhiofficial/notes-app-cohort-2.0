@@ -81,7 +81,7 @@ app.patch('/api/notes/:id', async (req,res) => {
 
 // for any other route we will send the index.html file to the client
 // This only serves HTML for non-API routes
-app.use('*', (req, res) => {
+app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
