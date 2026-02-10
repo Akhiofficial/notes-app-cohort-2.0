@@ -6,7 +6,10 @@ const path = require('path')
 
 
 
-app.use(corrs())
+app.use(corrs({
+    origin: "https://notes-app-cohort-2-0.onrender.com",
+    credentials: true
+}))
 app.use(express.json()) // for parsing application/json
 app.use(express.static('./public')) // for serving static files from the public folder)
 
